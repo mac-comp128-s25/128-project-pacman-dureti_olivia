@@ -9,7 +9,7 @@ public class MazeCell {
         return new MazeCell(true);
     }
 
-    public static MazeCell createPath() {
+    public static MazeCell createPath(boolean isSuperPellet) {
         return new MazeCell(false);
     }
 
