@@ -15,19 +15,8 @@ public class Maze {
         for (int i=0; i<R; i++) {
             for (int j=0; j<C; j++) {
                 int n = input.nextInt();
-                Boolean wall = null;
-                switch (n) {
-                    case 0:
-                        wall = false;
-                        break;
-                
-                    case 1:
-                        wall = true;
-                    default:
-                        break;
-                }
-
-                this.mazeCells[i][j] = new MazeCell(i, j, wall);
+                this.mazeCells[i][j] = MazeCell.fromInt(n);
+                this.mazeCells[i][j].setPosition(i * MazeCell.SIZE, j * MazeCell.SIZE);
             }
 
         }
