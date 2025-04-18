@@ -1,12 +1,19 @@
-public class MazeCell {
-    private boolean wall; // whether the tile is a wall
+import edu.macalester.graphics.GraphicsObject;
+import edu.macalester.graphics.Rectangle;
 
-    private MazeCell(boolean wall) {
+public class MazeCell{
+    private Boolean wall; // whether the tile is a wall
+    private int row;
+    private int col;
+
+    public MazeCell(int i, int j, Boolean wall) {
         this.wall = wall;
+        this.row = i;
+        this.col = j;
     }
 
     public static MazeCell createWall() {
-        return new MazeCell(true);
+        return new MazeCell(row, col, true);
     }
 
     public static MazeCell createPath(boolean isSuperPellet) {
