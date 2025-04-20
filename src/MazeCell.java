@@ -8,12 +8,12 @@ import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 
 public class MazeCell extends GraphicsGroup {
-    public static final int SIZE = 52;
+    public static final int SIZE = 40;
     private static final Paint WALL_COLOR = Color.BLUE;
     private static final Paint MAZE_COLOR = Color.BLACK;
     private static final Paint PELLET_COLOR = Color.YELLOW;
-    private static final double PELLET_SIZE = 8;
-    private static final double SUPER_PELLET_SIZE = 16;
+    private static final double PELLET_SIZE = 6;
+    private static final double SUPER_PELLET_SIZE = 15;
 
     private Rectangle cellBackground;
     private Ellipse pellet;
@@ -25,10 +25,14 @@ public class MazeCell extends GraphicsGroup {
         this.wall = wall;
         this.pelletState = pelletState;
         cellBackground = new Rectangle(0, 0, SIZE, SIZE);
-        cellBackground.setFillColor(wall ? WALL_COLOR : MAZE_COLOR);
-        cellBackground.setStroked(false);
+        // cellBackground.setFillColor(wall ? WALL_COLOR : MAZE_COLOR);
+        cellBackground.setFillColor(Color.BLACK);
+        cellBackground.setStroked(true);
+        cellBackground.setStrokeColor(Color.BLUE);
         add(cellBackground);
         if (hasPellet()) {
+            cellBackground.setStroked(false);
+
             final double size = hasSuperPellet() ? SUPER_PELLET_SIZE : PELLET_SIZE;
             pellet = new Ellipse(0, 0, size, size);
             pellet.setCenter(getCenter());
@@ -40,8 +44,8 @@ public class MazeCell extends GraphicsGroup {
 
     public static MazeCell fromInt(int code) {
         return switch (code) {
-            case 0 -> createWall();
-            case 1 -> createPath(false);
+            case 1 -> createWall();
+            case 0 -> createPath(false);
             case 2 -> createPath(true);
             default -> throw new IllegalArgumentException("code out of bounds");
         };

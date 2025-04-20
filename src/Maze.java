@@ -1,6 +1,9 @@
 import java.io.InputStream;
 import java.util.Scanner;
 
+import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsGroup;
+
 public class Maze {
     private MazeCell[][] mazeCells;
 
@@ -17,11 +20,24 @@ public class Maze {
 
                 int n = input.nextInt();
                 this.mazeCells[i][j] = MazeCell.fromInt(n);
-                this.mazeCells[i][j].setPosition(i * MazeCell.SIZE, j * MazeCell.SIZE);
+                this.mazeCells[i][j].setPosition((j) * MazeCell.SIZE, (i) * MazeCell.SIZE);
+            }
+        
+        }
+        input.close();
+    }
+
+    public GraphicsGroup getMaze() {
+        GraphicsGroup theMaze = new GraphicsGroup();
+        for (MazeCell[] aRow : mazeCells) {
+            for (GraphicsGroup aCell : aRow) {
+                theMaze.add(aCell);
             }
 
         }
-        input.close();
-        
+        return theMaze;
     }
+
+
+
 }
