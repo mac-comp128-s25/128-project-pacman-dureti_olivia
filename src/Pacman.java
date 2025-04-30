@@ -1,13 +1,10 @@
 import java.util.Set;
 
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.Ellipse;
-import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.events.Key;
 
 public class Pacman extends CanvasWindow {
-    private static final int ANIMATE_DELAY = 60;
+    private static final int ANIMATE_DELAY = 30;
 
     private Player player;
     private Maze maze;
@@ -16,7 +13,7 @@ public class Pacman extends CanvasWindow {
     private int animateTimer = 0;
 
     public Pacman() {
-        super("Pacman", 40*23, 40*21);
+        super("Pacman", MazeCell.SIZE*23, MazeCell.SIZE*21);
 
         maze = new Maze();
         add(maze.getMaze());
