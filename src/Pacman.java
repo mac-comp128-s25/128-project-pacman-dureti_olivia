@@ -26,7 +26,7 @@ public class Pacman extends CanvasWindow {
         animate((e2) -> {
             final Set<Key> keys = getKeysPressed();
             if (keys.contains(Key.RIGHT_ARROW)) {
-                    player.moveRight();
+                player.moveRight();
             }
             if (keys.contains(Key.LEFT_ARROW)) {
                     player.moveLeft();

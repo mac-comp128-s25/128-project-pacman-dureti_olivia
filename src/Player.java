@@ -1,9 +1,10 @@
+import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 
 public class Player extends Image {
     
     public static final double SIZE = 25;
-    private final double MOVEMENT = 2;
+    public final static double WAIT = 1000;
 
     private boolean isMoving = true;
     private int direction = Direction.UP;
@@ -15,21 +16,24 @@ public class Player extends Image {
 
     public void animate() {
         if (direction == Direction.LEFT) {
-            double x = getX() - MOVEMENT;
+            double x = getX() - MazeCell.SIZE;
             setPosition(x, getY());
         } else if (direction == Direction.RIGHT) {
-            double x = getX() + MOVEMENT;
+            double x = getX() + MazeCell.SIZE;
             setPosition(x, getY());
         } else if (direction == Direction.UP) {
-            double y = getY() - MOVEMENT;
+            double y = getY() - MazeCell.SIZE;
             setPosition(getX(), y);
         } else if (direction == Direction.DOWN) {
-            double y = getY() + MOVEMENT;
+            double y = getY() + MazeCell.SIZE;
             setPosition(getX(), y);
         }
         return;
     }
 
+    // public void wait(CanvasWindow canvas) {
+    //     canvas.pause(W);
+    // }
     public void moveLeft() {
         direction = Direction.LEFT;
     }
