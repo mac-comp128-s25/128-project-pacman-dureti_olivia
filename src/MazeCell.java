@@ -75,7 +75,15 @@ public class MazeCell extends GraphicsGroup {
         return hasPellet() && pelletState.booleanValue();
     }
 
-    public Ellipse getPellet() {
-        return pellet;
+
+    public boolean eatPellet() {
+        if (hasPellet()) {
+            remove(pellet);
+            pellet = null;
+            pelletState = null;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
