@@ -40,16 +40,12 @@ public class Pacman extends CanvasWindow {
                     player.moveDown();
             }});
 
-        animate((e5) -> {
-            if (maze.cellIsWall((int) player.getX(), (int) player.getY())) {
-                player.stopMoving();
+        // animate((e5) -> {
+        //     if (maze.cellIsWall((int) player.getX(), (int) player.getY())) {
+        //         player.stopMoving();
 
-            }
-      
-            // if (getElementAt(player.getX(), player.getY()) instanceof ) {
-            //     player.stopMoving();
-            // }
-        });
+        //     }
+        // });
 
     }
 
