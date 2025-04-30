@@ -7,9 +7,13 @@ import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.events.Key;
 
 public class Pacman extends CanvasWindow {
-    Player player;
-    Maze maze;
-    MazeCell mazeCell;
+    private static final int ANIMATE_DELAY = 60;
+
+    private Player player;
+    private Maze maze;
+    private MazeCell mazeCell;
+
+    private int animateTimer = 0;
 
     public Pacman() {
         super("Pacman", 40*23, 40*21);
@@ -21,7 +25,13 @@ public class Pacman extends CanvasWindow {
 
         player.setCenter((11*MazeCell.SIZE)+(MazeCell.SIZE/2), (15*MazeCell.SIZE)+(MazeCell.SIZE/2)); 
         add(player);
-        animate(player::animate);
+        animate(() -> {
+            animateTimer++;
+            animateTimer %= ANIMATE_DELAY;
+            if (animateTimer == 0) {
+                player.move();
+            }
+        });
 
         animate((e2) -> {
             final Set<Key> keys = getKeysPressed();

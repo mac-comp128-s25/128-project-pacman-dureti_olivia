@@ -14,7 +14,7 @@ public class Player extends Image {
         setMaxHeight(SIZE);
     }
 
-    public void animate() {
+    public void move() {
         if (direction == Direction.LEFT) {
             double x = getX() - MazeCell.SIZE;
             setPosition(x, getY());
@@ -28,7 +28,6 @@ public class Player extends Image {
             double y = getY() + MazeCell.SIZE;
             setPosition(getX(), y);
         }
-        return;
     }
 
     // public void wait(CanvasWindow canvas) {

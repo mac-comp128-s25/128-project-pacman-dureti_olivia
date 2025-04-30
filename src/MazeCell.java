@@ -75,7 +75,6 @@ public class MazeCell extends GraphicsGroup {
         return hasPellet() && pelletState.booleanValue();
     }
 
-
     public boolean eatPellet() {
         if (hasPellet()) {
             remove(pellet);
