@@ -1,4 +1,5 @@
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.events.Key;
@@ -24,7 +25,6 @@ public class Pacman extends CanvasWindow {
                     player.moveRight();
             }});
         
-
         animate((e1) -> {
             if (getKeysPressed().contains(Key.LEFT_ARROW)) {
                     player.moveLeft();
@@ -39,10 +39,20 @@ public class Pacman extends CanvasWindow {
             if (getKeysPressed().contains(Key.DOWN_ARROW)) {
                     player.moveDown();
             }});
-        
+
+        animate((e5) -> {
+            if (maze.cellIsWall((int) player.getX(), (int) player.getY())) {
+                player.stopMoving();
+
+            }
+      
+            // if (getElementAt(player.getX(), player.getY()) instanceof ) {
+            //     player.stopMoving();
+            // }
+        });
+
     }
 
-      
 
     public static void main(String[] args) {
         new Pacman();

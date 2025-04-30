@@ -3,9 +3,11 @@ import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.GraphicsObject;
 
 public class Maze {
     private MazeCell[][] mazeCells;
+    private GraphicsGroup theMaze;
 
     public Maze() {
         InputStream pacResource = Maze.class.getResourceAsStream("/pacmanMaze");
@@ -28,14 +30,27 @@ public class Maze {
     }
 
     public GraphicsGroup getMaze() {
-        GraphicsGroup theMaze = new GraphicsGroup();
+        theMaze = new GraphicsGroup();
         for (MazeCell[] aRow : mazeCells) {
             for (GraphicsGroup aCell : aRow) {
                 theMaze.add(aCell);
             }
-
         }
         return theMaze;
+    }
+
+
+
+    //x y mazeCell is a wall?
+    public boolean cellIsWall(int x, int y) {
+
+        MazeCell theCell = mazeCells[(int) x][(int) y];
+        if (theCell.isWall()) {
+            return true;
+        }
+
+        return false;
+
     }
 
 

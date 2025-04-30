@@ -2,38 +2,44 @@ import edu.macalester.graphics.Image;
 
 public class Player extends Image {
     public static final double SIZE = 25;
-    private double x;
-    private double y;
     private final double MOVEMENT = 2;
+
+    private boolean isMoving = true;
 
     public Player() {
         super("pacman.png");
         setMaxHeight(SIZE);
-        // this.x = x;
-        // this.y = y;
     }
 
     public void moveLeft() {
-        double x = getX() - MOVEMENT;
-
-        setPosition(x, getY());
+        if (isMoving) {
+            double x = getX() - MOVEMENT;
+            setPosition(x, getY());
+        }
     }
 
     public void moveRight() {
-        double x = getX() + MOVEMENT;
-
-        setPosition(x, getY());
+        if (isMoving) {
+            double x = getX() + MOVEMENT;
+            setPosition(x, getY());
+        }
     }
 
     public void moveUp() {
-        double y = getY() - MOVEMENT;
-
-        setPosition(getX(), y);
+        if (isMoving) {
+            double y = getY() - MOVEMENT;
+            setPosition(getX(), y);
+        }
     }
 
     public void moveDown() {
-        double y = getY() + MOVEMENT;
+        if (isMoving) {
+            double y = getY() + MOVEMENT;
+            setPosition(getX(), y);
+        }
+    }
 
-        setPosition(getX(), y);
+    public void stopMoving() {
+        isMoving = false;
     }
 }
