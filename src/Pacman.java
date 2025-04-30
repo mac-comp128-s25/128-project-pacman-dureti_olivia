@@ -1,3 +1,5 @@
+import java.util.Set;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
@@ -19,32 +21,33 @@ public class Pacman extends CanvasWindow {
 
         player.setCenter((11*MazeCell.SIZE)+(MazeCell.SIZE/2), (15*MazeCell.SIZE)+(MazeCell.SIZE/2)); 
         add(player);
+        animate(player::animate);
 
         animate((e2) -> {
-            if (getKeysPressed().contains(Key.RIGHT_ARROW)) {
+            final Set<Key> keys = getKeysPressed();
+            if (keys.contains(Key.RIGHT_ARROW)) {
                     player.moveRight();
-            }});
-        
-        animate((e1) -> {
-            if (getKeysPressed().contains(Key.LEFT_ARROW)) {
+            }
+            if (keys.contains(Key.LEFT_ARROW)) {
                     player.moveLeft();
-            }});
-
-        animate((e3) -> {
-            if (getKeysPressed().contains(Key.UP_ARROW)) {
+            }
+            if (keys.contains(Key.UP_ARROW)) {
                     player.moveUp();
-            }});
-
-        animate((e4) -> {
-            if (getKeysPressed().contains(Key.DOWN_ARROW)) {
+            }
+            if (keys.contains(Key.DOWN_ARROW)) {
                     player.moveDown();
-            }});
+            }
+        });
 
         // animate((e5) -> {
         //     if (maze.cellIsWall((int) player.getX(), (int) player.getY())) {
         //         player.stopMoving();
 
         //     }
+      
+        //     // if (getElementAt(player.getX(), player.getY()) instanceof ) {
+        //     //     player.stopMoving();
+        //     // }
         // });
 
     }
