@@ -12,6 +12,7 @@ public class Player extends Image {
     public Player() {
         super("pacman.png");
         setMaxHeight(SIZE);
+        setCenter((11*MazeCell.SIZE)+(MazeCell.SIZE/2), (15*MazeCell.SIZE)+(MazeCell.SIZE/2)); 
     }
 
     public void move() {

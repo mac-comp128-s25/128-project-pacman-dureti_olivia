@@ -23,7 +23,6 @@ public class Pacman extends CanvasWindow {
 
         player = new Player();
 
-        player.setCenter((11*MazeCell.SIZE)+(MazeCell.SIZE/2), (15*MazeCell.SIZE)+(MazeCell.SIZE/2)); 
         add(player);
         animate(() -> {
             animateTimer++;
