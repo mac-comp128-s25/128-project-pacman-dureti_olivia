@@ -12,7 +12,7 @@ public class Pacman extends CanvasWindow {
     MazeCell mazeCell;
 
     public Pacman() {
-        super("Pacman", 1500, 1500);
+        super("Pacman", 40*23, 40*21);
 
         maze = new Maze();
         add(maze.getMaze());
@@ -49,7 +49,6 @@ public class Pacman extends CanvasWindow {
         //     //     player.stopMoving();
         //     // }
         // });
-
     }
 
 
