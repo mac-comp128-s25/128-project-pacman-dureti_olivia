@@ -1,10 +1,11 @@
 import java.util.Set;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.Point;
 import edu.macalester.graphics.events.Key;
 
 public class Pacman extends CanvasWindow {
-    private static final int ANIMATE_DELAY = 30;
+    private static final int ANIMATE_DELAY = 20;
 
     private Player player;
     private Maze maze;
@@ -21,40 +22,68 @@ public class Pacman extends CanvasWindow {
         player = new Player();
 
         add(player);
+
         animate(() -> {
+            int cellSize = MazeCell.SIZE;
+            int mazeFactor = cellSize/2;
+
+            Point rightCell = player.anticipateRight();
+            Point leftCell = player.anticipateLeft();
+            Point upCell = player.anticipateUp();
+            Point downCell = player.anticipateDown();
+
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
             if (animateTimer == 0) {
-                player.move();
+                
+                if (player.getDirection() == Direction.RIGHT
+                && maze.cellIsWall((int) (((rightCell.getX()-mazeFactor)/(cellSize))), (int) ((rightCell.getY()-mazeFactor)/cellSize))) {
+                    player.stopMoving();
+                }
+
+                else if (player.getDirection() == Direction.LEFT 
+                && maze.cellIsWall((int) (((leftCell.getX()-mazeFactor)/(cellSize))), (int) ((leftCell.getY()-mazeFactor)/cellSize))) {
+                    player.stopMoving();
+                }
+
+                else if (player.getDirection() == Direction.UP 
+                && maze.cellIsWall((int) (((upCell.getX()-mazeFactor)/(cellSize))), (int) ((upCell.getY()-mazeFactor)/cellSize))) {
+                    player.stopMoving();
+                }
+
+                else if (player.getDirection() == Direction.DOWN
+                && maze.cellIsWall((int) (((downCell.getX()-mazeFactor)/(cellSize))), (int) ((downCell.getY()-mazeFactor)/cellSize))) {
+                    player.stopMoving();
+                }
+
+                else {
+                    player.move();
+                }
             }
         });
 
-        animate((e2) -> {
-            final Set<Key> keys = getKeysPressed();
-            if (keys.contains(Key.RIGHT_ARROW)) {
-                player.moveRight();
+        onKeyDown((keyEvent) -> {
+
+            if (keyEvent.getKey().equals(Key.RIGHT_ARROW)) {
+
+                    player.keepMoving();
+                    player.moveRight();    
             }
-            if (keys.contains(Key.LEFT_ARROW)) {
-                    player.moveLeft();
+            else if (keyEvent.getKey().equals(Key.LEFT_ARROW)) {
+                
+                    player.keepMoving();
+                    player.moveLeft();    
             }
-            if (keys.contains(Key.UP_ARROW)) {
-                    player.moveUp();
+            else if (keyEvent.getKey().equals(Key.UP_ARROW)) {
+                    player.keepMoving();
+                    player.moveUp();    
+                    
             }
-            if (keys.contains(Key.DOWN_ARROW)) {
-                    player.moveDown();
+            else if (keyEvent.getKey().equals(Key.DOWN_ARROW)) {
+                    player.keepMoving();
+                    player.moveDown();    
             }
         });
-
-        // animate((e5) -> {
-        //     if (maze.cellIsWall((int) player.getX(), (int) player.getY())) {
-        //         player.stopMoving();
-
-        //     }
-      
-        //     // if (getElementAt(player.getX(), player.getY()) instanceof ) {
-        //     //     player.stopMoving();
-        //     // }
-        // });
     }
 
 

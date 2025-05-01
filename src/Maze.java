@@ -19,12 +19,10 @@ public class Maze {
 
         for (int i=0; i<R; i++) {
             for (int j=0; j<C; j++) {
-
                 int n = input.nextInt();
                 this.mazeCells[i][j] = MazeCell.fromInt(n);
                 this.mazeCells[i][j].setPosition((j) * MazeCell.SIZE, (i) * MazeCell.SIZE);
             }
-        
         }
         input.close();
     }
@@ -40,15 +38,23 @@ public class Maze {
     }
 
 
-
     //x y mazeCell is a wall?
     public boolean cellIsWall(int x, int y) {
 
-        MazeCell theCell = mazeCells[(int) x][(int) y];
+        MazeCell theCell = mazeCells[y][x];
         if (theCell.isWall()) {
             return true;
         }
 
+        return false;
+
+    }
+
+    public boolean cellhasPellet(int x, int y) {
+        MazeCell theCell = mazeCells[x][y];
+        if (theCell.hasPellet()) {
+            return true;
+        }
         return false;
 
     }
