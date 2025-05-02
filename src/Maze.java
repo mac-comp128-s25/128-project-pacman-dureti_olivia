@@ -45,9 +45,7 @@ public class Maze {
         if (theCell.isWall()) {
             return true;
         }
-
         return false;
-
     }
 
     public Boolean eatCellPellet(int x, int y) {
@@ -59,9 +57,7 @@ public class Maze {
         } else if (value !=null && !value) {
             return false;
         }
-
         return null;
-
     }
 
 
