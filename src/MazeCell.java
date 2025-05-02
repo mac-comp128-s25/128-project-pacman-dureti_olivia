@@ -25,14 +25,11 @@ public class MazeCell extends GraphicsGroup {
         this.wall = wall;
         this.pelletState = pelletState;
         cellBackground = new Rectangle(0, 0, SIZE, SIZE);
-        // cellBackground.setFillColor(wall ? WALL_COLOR : MAZE_COLOR);
         cellBackground.setFillColor(Color.BLACK);
-        cellBackground.setStroked(true);
         cellBackground.setStrokeColor(Color.BLUE);
+        cellBackground.setStroked(isWall());
         add(cellBackground);
         if (hasPellet()) {
-            cellBackground.setStroked(false);
-
             final double size = hasSuperPellet() ? SUPER_PELLET_SIZE : PELLET_SIZE;
             pellet = new Ellipse(0, 0, size, size);
             pellet.setCenter(getCenter());
@@ -44,9 +41,10 @@ public class MazeCell extends GraphicsGroup {
 
     public static MazeCell fromInt(int code) {
         return switch (code) {
-            case 1 -> createWall();
             case 0 -> createPath(false);
+            case 1 -> createWall();
             case 2 -> createPath(true);
+            case 3 -> createPath(null);
             default -> throw new IllegalArgumentException("code out of bounds");
         };
     }
@@ -55,7 +53,7 @@ public class MazeCell extends GraphicsGroup {
         return new MazeCell(true, null);
     }
 
-    public static MazeCell createPath(boolean isSuperPellet) {
+    public static MazeCell createPath(Boolean isSuperPellet) {
         return new MazeCell(false, isSuperPellet);
     }
 
