@@ -22,28 +22,16 @@ public class Player extends Image {
     }
 
     public void move() {
-        if (direction == Direction.LEFT) {
-            double x = getX() - MazeCell.SIZE;
-            setPosition(x, getY());
-        } else if (direction == Direction.RIGHT) {
-            double x = getX() + MazeCell.SIZE;
-            setPosition(x, getY());
-        } else if (direction == Direction.UP) {
-            double y = getY() - MazeCell.SIZE;
-            setPosition(getX(), y);
-        } else if (direction == Direction.DOWN) {
-            double y = getY() + MazeCell.SIZE;
-            setPosition(getX(), y);
-        } 
-        else if (direction == Direction.NONE) {
-            stopMoving();
+        final double x = getX();
+        final double y = getY();
+        switch (direction) {
+            case Direction.LEFT  -> setX(x - MazeCell.SIZE);
+            case Direction.RIGHT -> setX(x + MazeCell.SIZE);
+            case Direction.UP    -> setY(y - MazeCell.SIZE);
+            case Direction.DOWN  -> setY(y + MazeCell.SIZE);
+            case Direction.NONE  -> stopMoving();
+            default -> throw new IllegalArgumentException("invalid Direction");
         }
-
-        // }
-        // else if (getElementAt((getX()/(40*getX())), (getY()/(40*getY()))) ) {
-        //     MazeCell.eatPellet();
-        // }
-
     }
 
   
