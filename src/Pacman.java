@@ -22,9 +22,6 @@ public class Pacman extends CanvasWindow {
         player = new Player();
 
         add(player);
-
-        
-
         animate(() -> {
             int cellSize = MazeCell.SIZE;
             int mazeFactor = cellSize/2;
