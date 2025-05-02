@@ -37,7 +37,6 @@ public class Player extends Image {
         } 
         else if (direction == Direction.NONE) {
             stopMoving();
-
         }
 
         // }

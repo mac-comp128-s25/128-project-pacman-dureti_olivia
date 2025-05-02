@@ -50,9 +50,9 @@ public class Maze {
 
     }
 
-    public boolean cellhasPellet(int x, int y) {
-        MazeCell theCell = mazeCells[x][y];
-        if (theCell.hasPellet()) {
+    public boolean eatCellPellet(int x, int y) {
+        MazeCell theCell = mazeCells[y][x];
+        if (theCell.eatPellet()) {
             return true;
         }
         return false;

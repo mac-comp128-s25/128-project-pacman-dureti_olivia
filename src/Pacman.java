@@ -9,7 +9,6 @@ public class Pacman extends CanvasWindow {
 
     private Player player;
     private Maze maze;
-    private MazeCell mazeCell;
 
     private int animateTimer = 0;
 
@@ -23,6 +22,7 @@ public class Pacman extends CanvasWindow {
 
         add(player);
         animate(() -> {
+            
             int cellSize = MazeCell.SIZE;
             int mazeFactor = cellSize/2;
 
@@ -36,9 +36,13 @@ public class Pacman extends CanvasWindow {
             boolean isUpPath = !maze.cellIsWall((int) (((upCell.getX()-mazeFactor)/(cellSize))), (int) ((upCell.getY()-mazeFactor)/cellSize));
             boolean isDownPath = !maze.cellIsWall((int) (((downCell.getX()-mazeFactor)/(cellSize))), (int) ((downCell.getY()-mazeFactor)/cellSize));
 
+            
+            
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
             if (animateTimer == 0) {
+                
+                maze.eatCellPellet((int) (((player.getCenter().getX()-mazeFactor)/(cellSize))), (int) ((player.getCenter().getY()-mazeFactor)/cellSize));
                 
                 if (player.getDirection() == Direction.RIGHT
                 && !isRightPath
