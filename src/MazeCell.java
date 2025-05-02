@@ -84,4 +84,5 @@ public class MazeCell extends GraphicsGroup {
             return null;
         }
     }
+
 }

@@ -43,7 +43,9 @@ public class Pacman extends CanvasWindow {
             if (animateTimer == 0) {
                 
                 maze.eatCellPellet((int) (((player.getCenter().getX()-mazeFactor)/(cellSize))), (int) ((player.getCenter().getY()-mazeFactor)/cellSize));
-                
+
+
+
                 if (player.getDirection() == Direction.RIGHT
                 && !isRightPath
                 // && (isLeftPath || isUpPath || isDownPath)
