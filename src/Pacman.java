@@ -5,7 +5,7 @@ import edu.macalester.graphics.Point;
 import edu.macalester.graphics.events.Key;
 
 public class Pacman extends CanvasWindow {
-    private static final int ANIMATE_DELAY = 20;
+    private static final int ANIMATE_DELAY = 15;
 
     private Player player;
     private Maze maze;
@@ -23,6 +23,8 @@ public class Pacman extends CanvasWindow {
 
         add(player);
 
+        
+
         animate(() -> {
             int cellSize = MazeCell.SIZE;
             int mazeFactor = cellSize/2;
@@ -32,27 +34,40 @@ public class Pacman extends CanvasWindow {
             Point upCell = player.anticipateUp();
             Point downCell = player.anticipateDown();
 
+            boolean isRightPath = !maze.cellIsWall((int) (((rightCell.getX()-mazeFactor)/(cellSize))), (int) ((rightCell.getY()-mazeFactor)/cellSize));
+            boolean isLeftPath = !maze.cellIsWall((int) (((leftCell.getX()-mazeFactor)/(cellSize))), (int) ((leftCell.getY()-mazeFactor)/cellSize));
+            boolean isUpPath = !maze.cellIsWall((int) (((upCell.getX()-mazeFactor)/(cellSize))), (int) ((upCell.getY()-mazeFactor)/cellSize));
+            boolean isDownPath = !maze.cellIsWall((int) (((downCell.getX()-mazeFactor)/(cellSize))), (int) ((downCell.getY()-mazeFactor)/cellSize));
+
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
             if (animateTimer == 0) {
                 
                 if (player.getDirection() == Direction.RIGHT
-                && maze.cellIsWall((int) (((rightCell.getX()-mazeFactor)/(cellSize))), (int) ((rightCell.getY()-mazeFactor)/cellSize))) {
+                && !isRightPath
+                // && (isLeftPath || isUpPath || isDownPath)
+                ) {
                     player.stopMoving();
                 }
 
                 else if (player.getDirection() == Direction.LEFT 
-                && maze.cellIsWall((int) (((leftCell.getX()-mazeFactor)/(cellSize))), (int) ((leftCell.getY()-mazeFactor)/cellSize))) {
+                && !isLeftPath
+                // && (isRightPath || isUpPath || isDownPath)
+                ) {
                     player.stopMoving();
                 }
 
                 else if (player.getDirection() == Direction.UP 
-                && maze.cellIsWall((int) (((upCell.getX()-mazeFactor)/(cellSize))), (int) ((upCell.getY()-mazeFactor)/cellSize))) {
+                && !isUpPath
+                // && (isLeftPath || isRightPath || isDownPath)
+                ) {
                     player.stopMoving();
                 }
 
                 else if (player.getDirection() == Direction.DOWN
-                && maze.cellIsWall((int) (((downCell.getX()-mazeFactor)/(cellSize))), (int) ((downCell.getY()-mazeFactor)/cellSize))) {
+                && !isDownPath
+                // && (isLeftPath || isUpPath || isRightPath)
+                ) {
                     player.stopMoving();
                 }
 
@@ -62,28 +77,37 @@ public class Pacman extends CanvasWindow {
             }
         });
 
+
         onKeyDown((keyEvent) -> {
-
-            if (keyEvent.getKey().equals(Key.RIGHT_ARROW)) {
-
+           
+            if (keyEvent.getKey().equals(Key.RIGHT_ARROW)
+            
+            ) {
                     player.keepMoving();
                     player.moveRight();    
             }
-            else if (keyEvent.getKey().equals(Key.LEFT_ARROW)) {
-                
+
+            else if (keyEvent.getKey().equals(Key.LEFT_ARROW)
+            ) {
                     player.keepMoving();
                     player.moveLeft();    
             }
-            else if (keyEvent.getKey().equals(Key.UP_ARROW)) {
+
+            else if (keyEvent.getKey().equals(Key.UP_ARROW)
+            ) {
                     player.keepMoving();
                     player.moveUp();    
-                    
             }
-            else if (keyEvent.getKey().equals(Key.DOWN_ARROW)) {
+
+            else if (keyEvent.getKey().equals(Key.DOWN_ARROW)
+            
+            ) {
                     player.keepMoving();
                     player.moveDown();    
             }
+
         });
+
     }
 
 

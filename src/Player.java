@@ -8,7 +8,7 @@ public class Player extends Image {
     public final static double WAIT = 1000;
 
     private boolean isMoving = true;
-    private int direction = Direction.LEFT;
+    private int direction = Direction.RIGHT;
     // private MazeCell mazeCell;
 
     public Player() {
@@ -55,6 +55,7 @@ public class Player extends Image {
             direction = Direction.NONE;
         }
     }
+    
     public Point anticipateLeft() {
         return new Point(getCenter().getX()-MazeCell.SIZE, getCenter().getY());
     }
@@ -97,7 +98,6 @@ public class Player extends Image {
 
     public void stopMoving() {
         isMoving = false;
-        // direction = Direction.NONE;
 
     }
     
