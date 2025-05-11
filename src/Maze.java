@@ -1,9 +1,7 @@
 import java.io.InputStream;
 import java.util.Scanner;
-
-import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsObject;
+
 
 public class Maze {
     private MazeCell[][] mazeCells;

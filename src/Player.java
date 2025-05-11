@@ -4,7 +4,6 @@ import edu.macalester.graphics.Point;
 public class Player extends Image {
 
     public static final double SIZE = 17;
-    public final static double WAIT = 1000;
     private boolean isMoving = true;
     public int direction = Direction.RIGHT;
 
