@@ -18,6 +18,7 @@ public class Pacman extends CanvasWindow {
     private int intVal = 0;
     private GraphicsText scoreCounter = new GraphicsText();
     private Rectangle scoreBackground;
+    private int previousDirection =  5;
     
 
     public Pacman() {
@@ -39,6 +40,8 @@ public class Pacman extends CanvasWindow {
 
         player = new Player();
         add(player);
+
+        
 
         animate(() -> {
             
@@ -71,38 +74,98 @@ public class Pacman extends CanvasWindow {
 
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
+
+            
             if (animateTimer == 0) {
-                System.out.println(player.direction);
+
+                // if you are going down an open path, and try to move right into a wall, don't stop moving --> instead, keep moving on this previous direction's path.
                 
-                if (player.getDirection() == Direction.RIGHT
-                && !isRightPath
-                ) {
-                    player.stopMoving();
+                        
+                    if (player.getDirection() == Direction.RIGHT
+                    && !isRightPath
+                    ) {
+                        if ((previousDirection == Direction.LEFT && !isLeftPath|| previousDirection == Direction.UP && !isUpPath || previousDirection == Direction.DOWN && !isDownPath) 
+                    && !isRightPath) {
+                        player.stopMoving();
+                    } else {
+                        if (previousDirection == Direction.LEFT) {
+                            player.moveLeft();
+                        }
+                        if (previousDirection == Direction.UP) {
+                            player.moveUp();
+                        }
+                        if (previousDirection == Direction.DOWN) {
+                            player.moveDown();
+                        }
+                        
+                    }
+                } 
+                
+
+                    else if (player.getDirection() == Direction.LEFT 
+                    && !isLeftPath
+                    ) {
+                        if ((previousDirection == Direction.RIGHT && !isRightPath|| previousDirection == Direction.UP && !isUpPath || previousDirection == Direction.DOWN && !isDownPath) 
+                    && !isLeftPath) {
+                        player.stopMoving();
+                    } else {
+                        if (previousDirection == Direction.RIGHT) {
+                            player.moveRight();
+                        }
+                        if (previousDirection == Direction.UP) {
+                            player.moveUp();
+                        }
+                        if (previousDirection == Direction.DOWN) {
+                            player.moveDown();
+                        }
+                    }
                 }
 
-                else if (player.getDirection() == Direction.LEFT 
-                && !isLeftPath
-                ) {
-                    player.stopMoving();
-                }
+                    else if (player.getDirection() == Direction.UP 
+                    && !isUpPath
+                    ) {
+                        if ((previousDirection == Direction.RIGHT && !isRightPath|| previousDirection == Direction.LEFT && !isLeftPath || previousDirection == Direction.DOWN && !isDownPath) 
+                        && !isUpPath) {
+                            player.stopMoving();
+                        } else {
+                            if (previousDirection == Direction.LEFT) {
+                                player.moveLeft();
+                            }
+                            if (previousDirection == Direction.RIGHT) {
+                                player.moveRight();
+                            }
+                            if (previousDirection == Direction.DOWN) {
+                                player.moveDown();
+                            }
+                        }
+                    }
 
-                else if (player.getDirection() == Direction.UP 
-                && !isUpPath
-                ) {
-                    player.stopMoving();
-                }
+                    else if (player.getDirection() == Direction.DOWN
+                    && !isDownPath
+                    ) {
+                        if ((previousDirection == Direction.RIGHT && !isRightPath|| previousDirection == Direction.UP && !isUpPath || previousDirection == Direction.LEFT && !isLeftPath) 
+                        && !isDownPath) {
+                            player.stopMoving();
+                        } else {
+                            if (previousDirection == Direction.LEFT) {
+                                player.moveLeft();
+                            }
+                            if (previousDirection == Direction.UP) {
+                                player.moveUp();
+                            }
+                            if (previousDirection == Direction.RIGHT) {
+                                player.moveRight();
+                            }
+                        }
+                    }
 
-                else if (player.getDirection() == Direction.DOWN
-                && !isDownPath
-                ) {
-                    player.stopMoving();
-                }
+                    else {
+                        player.move();
+                    }
 
-                else {
-                    player.move();
-                }
-            }
-        });
+                    previousDirection = player.getDirection();
+        }
+    });
 
         onKeyDown((keyEvent) -> {
             if (keyEvent.getKey().equals(Key.RIGHT_ARROW)) {
