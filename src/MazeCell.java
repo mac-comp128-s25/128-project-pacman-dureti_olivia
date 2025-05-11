@@ -8,12 +8,12 @@ import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 
 public class MazeCell extends GraphicsGroup {
-    public static final int SIZE = 40;
+    public static final int SIZE = 30;
     private static final Paint WALL_COLOR = Color.BLUE;
     private static final Paint MAZE_COLOR = Color.BLACK;
     private static final Paint PELLET_COLOR = Color.YELLOW;
     private static final double PELLET_SIZE = 6;
-    private static final double SUPER_PELLET_SIZE = 15;
+    private static final double SUPER_PELLET_SIZE = 13;
 
     private Rectangle cellBackground;
     private Ellipse pellet;

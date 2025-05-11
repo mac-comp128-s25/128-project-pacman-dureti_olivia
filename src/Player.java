@@ -4,17 +4,21 @@ import edu.macalester.graphics.Point;
 
 public class Player extends Image {
     
-    public static final double SIZE = 25;
+    public static final double SIZE = 17;
     public final static double WAIT = 1000;
 
     private boolean isMoving = true;
-    private int direction = Direction.RIGHT;
-    // private MazeCell mazeCell;
+    //
+    //FIX BELOW
+    //
+    public int direction = Direction.RIGHT;
+    ///
+    /// 
 
     public Player() {
         super("pacman.png");
         setMaxHeight(SIZE);
-        setCenter((11*MazeCell.SIZE)+(MazeCell.SIZE/2), (15*MazeCell.SIZE)+(MazeCell.SIZE/2)); 
+        setCenter((12*MazeCell.SIZE)+(MazeCell.SIZE/2), (16*MazeCell.SIZE)+(MazeCell.SIZE/2)); 
     }
 
     public int getDirection() {
@@ -50,9 +54,11 @@ public class Player extends Image {
     public void moveRight() {
         if (isMoving) {
             direction = Direction.RIGHT;
-            } else {
-                direction = Direction.NONE;
             }
+            
+            // else {
+            //     direction = Direction.NONE;
+            // }
     }
 
     public Point anticipateRight() {
@@ -62,9 +68,10 @@ public class Player extends Image {
     public void moveUp() {
         if (isMoving) {
             direction = Direction.UP;
-            } else {
-                direction = Direction.NONE;
-            }
+            } 
+            // else {
+            //     direction = Direction.NONE;
+            // }
     }
 
     public Point anticipateUp() {
@@ -74,9 +81,10 @@ public class Player extends Image {
     public void moveDown() {
         if (isMoving) {
             direction = Direction.DOWN;
-            } else {
-                direction = Direction.NONE;
-            }
+            } 
+            // else {
+            //     direction = Direction.NONE;
+            // }
     }
 
     public Point anticipateDown() {

@@ -1,7 +1,10 @@
+import java.awt.Color;
 import java.util.Set;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Point;
+import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.events.Key;
 
 public class Pacman extends CanvasWindow {
@@ -12,15 +15,31 @@ public class Pacman extends CanvasWindow {
 
     private int animateTimer = 0;
 
+    private int intVal = 0;
+    private GraphicsText scoreCounter = new GraphicsText();
+    private Rectangle scoreBackground;
+    
+
     public Pacman() {
-        super("Pacman", MazeCell.SIZE*23, MazeCell.SIZE*21);
+        super("Pacman", MazeCell.SIZE*25, MazeCell.SIZE*23);
 
         maze = new Maze();
         add(maze.getMaze());
 
-        player = new Player();
+        scoreBackground = new Rectangle((MazeCell.SIZE*20), 2, 120, MazeCell.SIZE-5);
+        scoreBackground.setFillColor(Color.blue);
+        scoreBackground.setStrokeColor(Color.white);
+        add(scoreBackground);
 
+        scoreCounter.setCenter((MazeCell.SIZE*21.5)-(MazeCell.SIZE/5), MazeCell.SIZE-(MazeCell.SIZE/6));
+        scoreCounter.setFillColor(Color.white);
+        scoreCounter.setText(String.valueOf(intVal));
+        scoreCounter.setFontSize(MazeCell.SIZE-5);
+        add(scoreCounter);
+
+        player = new Player();
         add(player);
+
         animate(() -> {
             
             int cellSize = MazeCell.SIZE;
@@ -36,38 +55,45 @@ public class Pacman extends CanvasWindow {
             boolean isUpPath = !maze.cellIsWall((int) (((upCell.getX()-mazeFactor)/(cellSize))), (int) ((upCell.getY()-mazeFactor)/cellSize));
             boolean isDownPath = !maze.cellIsWall((int) (((downCell.getX()-mazeFactor)/(cellSize))), (int) ((downCell.getY()-mazeFactor)/cellSize));
 
+            Boolean valuePellet = (maze.eatCellPellet((int) (((player.getCenter().getX()-mazeFactor)/(cellSize))), (int) ((player.getCenter().getY()-mazeFactor)/cellSize)));
+
+                if (valuePellet!= null) {
+                    if (valuePellet) {
+                        intVal += 50;
+                        scoreCounter.setText(String.valueOf(intVal));
+                    }
+                    else if (!valuePellet) {
+                        intVal += 10;
+                        scoreCounter.setText(String.valueOf(intVal));
+
+                    } 
+            } 
 
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
             if (animateTimer == 0) {
+                System.out.println(player.direction);
                 
-                maze.eatCellPellet((int) (((player.getCenter().getX()-mazeFactor)/(cellSize))), (int) ((player.getCenter().getY()-mazeFactor)/cellSize));
-
-
                 if (player.getDirection() == Direction.RIGHT
                 && !isRightPath
-                // && (isLeftPath || isUpPath || isDownPath)
                 ) {
                     player.stopMoving();
                 }
 
                 else if (player.getDirection() == Direction.LEFT 
                 && !isLeftPath
-                // && (isRightPath || isUpPath || isDownPath)
                 ) {
                     player.stopMoving();
                 }
 
                 else if (player.getDirection() == Direction.UP 
                 && !isUpPath
-                // && (isLeftPath || isRightPath || isDownPath)
                 ) {
                     player.stopMoving();
                 }
 
                 else if (player.getDirection() == Direction.DOWN
                 && !isDownPath
-                // && (isLeftPath || isUpPath || isRightPath)
                 ) {
                     player.stopMoving();
                 }
@@ -78,35 +104,23 @@ public class Pacman extends CanvasWindow {
             }
         });
 
-
         onKeyDown((keyEvent) -> {
-           
-            if (keyEvent.getKey().equals(Key.RIGHT_ARROW)
-            
-            ) {
+            if (keyEvent.getKey().equals(Key.RIGHT_ARROW)) {
                     player.keepMoving();
                     player.moveRight();    
             }
-
-            else if (keyEvent.getKey().equals(Key.LEFT_ARROW)
-            ) {
+            else if (keyEvent.getKey().equals(Key.LEFT_ARROW)) {
                     player.keepMoving();
                     player.moveLeft();    
             }
-
-            else if (keyEvent.getKey().equals(Key.UP_ARROW)
-            ) {
+            else if (keyEvent.getKey().equals(Key.UP_ARROW)) {
                     player.keepMoving();
                     player.moveUp();    
             }
-
-            else if (keyEvent.getKey().equals(Key.DOWN_ARROW)
-            
-            ) {
+            else if (keyEvent.getKey().equals(Key.DOWN_ARROW)) {
                     player.keepMoving();
                     player.moveDown();    
             }
-
         });
 
     }
