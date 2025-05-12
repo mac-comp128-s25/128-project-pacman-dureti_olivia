@@ -128,18 +128,6 @@ public class Player extends Image {
         isMoving = true;
     }
 
-    /**
-     * Tests whether the player's is colliding with a ghost.
-     * @param ghost
-     * @return true if the player is colliding with a ghost, false if not.
-     */
-    public boolean collisionWithGhost(Ghost ghost) {
-        if (getElementAt(getCenter().getX(), getCenter().getY()).equals(ghost)) {
-            return true;
-        } 
-        return false;
-    }
-
     public java.awt.Point getCellPosition() {
         return new java.awt.Point((int) (((getCenter().getX()-(MazeCell.SIZE/2))/MazeCell.SIZE)), (int) ((getCenter().getY()-(MazeCell.SIZE/2))/MazeCell.SIZE));
     }

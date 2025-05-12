@@ -41,9 +41,9 @@ public class Pacman extends CanvasWindow {
             if (animate && animateTimer == 0) {
                 controlMovementStopping();
                 ghosts.forEach(ghost -> {
-                    if (!checkCollision(ghost)) {
+                    if (!collisionWithGhost(ghost)) {
                         ghost.move(maze, player);
-                        checkCollision(ghost);
+                        collisionWithGhost(ghost);
                     }
                 });
             }
@@ -54,10 +54,11 @@ public class Pacman extends CanvasWindow {
     }
 
     /**
-     * Checks for collision.
-     * @return true if collision, false if not.
+     * Tests whether the player's is colliding with a ghost.
+     * @param ghost
+     * @return true if the player is colliding with a ghost, false if not.
      */
-    public boolean checkCollision(Ghost ghost) {
+    public boolean collisionWithGhost(Ghost ghost) {
         if (ghost.asPoint().equals(player.getCellPosition())) {
             animate = false;
         }
