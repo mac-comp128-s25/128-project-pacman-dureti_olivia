@@ -3,6 +3,9 @@ public class BlinkyGhost extends Ghost {
         super(x, y, "blinky");
     }
     
+    /**
+     * Target Pacman's position
+     */
     protected java.awt.Point target(Maze maze, Player player) {
         return player.getCellPosition();
     }
