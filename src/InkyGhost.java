@@ -43,7 +43,7 @@ public class InkyGhost extends Ghost {
             if (nodes.size() == 0) {
                 target_node = first_node;
             } else {
-                target_node = nodes.get(rand.nextInt() % nodes.size());
+                target_node = nodes.get(Math.abs(rand.nextInt() % nodes.size()));
             }
         }
 
@@ -54,7 +54,7 @@ public class InkyGhost extends Ghost {
         }
 
         public void appendNode(java.awt.Point point) {
-            new Node(point);
+            target_node.addNode(new Node(point));
         }
     }
     
@@ -77,7 +77,7 @@ public class InkyGhost extends Ghost {
      * This one is different than vanilla Pacman! We use a Graph!
      */
     protected java.awt.Point target(Maze maze, Player player) {
-        if (rand.nextInt() % 1 == 0) {
+        if (rand.nextInt() % 20 == 0) {
             return graph.getAndNext();
         } else {
             return graph.get();
