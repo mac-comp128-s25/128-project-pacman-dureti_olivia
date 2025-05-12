@@ -22,13 +22,16 @@ public class Pacman extends CanvasWindow {
     private GraphicsText scoreCounter = new GraphicsText();
     private Rectangle scoreBackground;
     private int previousDirection =  4;
-    private final int CELLSIZE = MazeCell.SIZE;
-    private final int MAZEFACTOR = CELLSIZE/2;
+    private final static int CELLSIZE = MazeCell.SIZE;
+    private final static int MAZEFACTOR = CELLSIZE/2;
 
     /**
      * Draws the maze, scoreboard, and player to the canvas. Animates the player's movement
      */
     public Pacman() {
+        // We can not get the size of the Maze from our Maze object due to a limitation with Java.
+        // We are not allowed to referene attributes or methods of instances of classes until we call our constructor.
+        // I have never used a language before with this restriction, but due to it, we need to hardcode these values.
         super("Pacman", MazeCell.SIZE*25, MazeCell.SIZE*23);
         createAssets();
 
@@ -37,7 +40,7 @@ public class Pacman extends CanvasWindow {
 
         player = new Player();
 
-        ghosts = Set.of(new Ghost(11, 9));
+        ghosts = Set.of(new BlinkyGhost(2, 2));
         ghosts.forEach(this::add);
 
         add(player);
@@ -47,6 +50,7 @@ public class Pacman extends CanvasWindow {
             createScores();
             if (animateTimer == 0) {
                 controlMovementStopping();
+                ghosts.forEach(ghost -> ghost.move(maze, player));
             }
         });
 
@@ -104,7 +108,7 @@ public class Pacman extends CanvasWindow {
      * Sets the scoreboard to update whenever a pellet or super pellet is consumed
      */
     public void createScores() {
-        Boolean valuePellet = (maze.eatCellPellet((int) (((player.getCenter().getX()-MAZEFACTOR)/(CELLSIZE))), (int) ((player.getCenter().getY()-MAZEFACTOR)/CELLSIZE)));
+        Boolean valuePellet = (maze.eatCellPellet(player.getCellPosition()));
         if (valuePellet!= null) {
             if (valuePellet) {
                 intVal += 50;

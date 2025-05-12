@@ -139,4 +139,8 @@ public class Player extends Image {
         } 
         return false;
     }
+    
+    public java.awt.Point getCellPosition() {
+        return new java.awt.Point((int) (((getCenter().getX()-(MazeCell.SIZE/2))/MazeCell.SIZE)), (int) ((getCenter().getY()-(MazeCell.SIZE/2))/MazeCell.SIZE));
+    }
 }

@@ -81,4 +81,8 @@ public class Maze {
         return null;
     }
 
+    public Boolean eatCellPellet(java.awt.Point point) {
+        return eatCellPellet(point.x, point.y);
+    }
+
 }
