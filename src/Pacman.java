@@ -21,6 +21,7 @@ public class Pacman extends CanvasWindow {
     private GraphicsText scoreCounter = new GraphicsText();
     private Rectangle scoreBackground;
     private int previousDirection =  4;
+    private boolean animate = true;
     private final static int MAZEFACTOR = MazeCell.SIZE/2;
 
     /**
@@ -33,21 +34,34 @@ public class Pacman extends CanvasWindow {
         super("Pacman", MazeCell.SIZE*25, MazeCell.SIZE*23);
         createAssets();
 
-        ghosts = Set.of(new BlinkyGhost(2, 2), new InkyGhost(2, 20), new PinkyGhost(22, 2), new ClydeGhost(22, 20));
-        ghosts.forEach(this::add);
-
         animate(() -> {
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
             createScores();
-            if (animateTimer == 0) {
+            if (animate && animateTimer == 0) {
                 controlMovementStopping();
-                ghosts.forEach(ghost -> ghost.move(maze, player));
+                ghosts.forEach(ghost -> {
+                    if (!checkCollision(ghost)) {
+                        ghost.move(maze, player);
+                        checkCollision(ghost);
+                    }
+                });
             }
         });
 
         // move in the direction of the key that was pressed
         movePlayer();
+    }
+
+    /**
+     * Checks for collision.
+     * @return true if collision, false if not.
+     */
+    public boolean checkCollision(Ghost ghost) {
+        if (ghost.asPoint().equals(player.getCellPosition())) {
+            animate = false;
+        }
+        return !animate;
     }
 
     /**
@@ -91,6 +105,9 @@ public class Pacman extends CanvasWindow {
         scoreCounter.setText(String.valueOf(intVal));
         scoreCounter.setFontSize(MazeCell.SIZE-5);
         add(scoreCounter);
+
+        ghosts = Set.of(new BlinkyGhost(2, 2), new InkyGhost(2, 20), new PinkyGhost(22, 2), new ClydeGhost(22, 20));
+        ghosts.forEach(this::add);
 
         player = new Player();
         add(player);
