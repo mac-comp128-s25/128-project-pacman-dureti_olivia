@@ -4,7 +4,7 @@ public class ClydeGhost extends Ghost {
     }
     
     /**
-     * Hunt pacman when far away, but flee back home when close!
+     * Hunt Pacman when far away, but flee back home when close!
      */
     protected java.awt.Point target(Maze maze, Player player) {
         if (getPos().distance(player.getCellPosition()) >= 6) {
