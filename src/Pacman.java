@@ -35,15 +35,9 @@ public class Pacman extends CanvasWindow {
         super("Pacman", MazeCell.SIZE*25, MazeCell.SIZE*23);
         createAssets();
 
-        maze = new Maze();
-        add(maze.getMaze());
-
-        player = new Player();
-
         ghosts = Set.of(new BlinkyGhost(2, 2));
         ghosts.forEach(this::add);
 
-        add(player);
         animate(() -> {
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
@@ -207,8 +201,6 @@ public class Pacman extends CanvasWindow {
         }
         previousDirection = player.getDirection();
     }
-
-
 
     public static void main(String[] args) {
         new Pacman();
