@@ -8,7 +8,7 @@ import edu.macalester.graphics.Point;
 
 public class Player extends Image {
 
-    public static final double SIZE = 17;
+    public static final double SIZE = 20;
     private boolean isMoving = true;
     public int direction = Direction.RIGHT;
 
@@ -16,7 +16,7 @@ public class Player extends Image {
      * Creates the image of the pacman. Sets its size, and centers it at a starting location in the maze.
      */
     public Player() {
-        super("pacman.png");
+        super("pacman_right.png");
         setMaxHeight(SIZE);
         setCenter((12*MazeCell.SIZE)+(MazeCell.SIZE/2), (16*MazeCell.SIZE)+(MazeCell.SIZE/2)); 
     }
@@ -50,7 +50,8 @@ public class Player extends Image {
      */
     public void moveLeft() {
         if (isMoving) {
-        direction = Direction.LEFT;
+            setImagePath("pacman_left.png");
+            direction = Direction.LEFT;
         }
     }
     
@@ -67,8 +68,9 @@ public class Player extends Image {
      */
     public void moveRight() {
         if (isMoving) {
+            setImagePath("pacman_right.png");
             direction = Direction.RIGHT;
-            }
+        }
     }
 
     /**
@@ -84,8 +86,9 @@ public class Player extends Image {
      */
     public void moveUp() {
         if (isMoving) {
+            setImagePath("pacman_up.png");
             direction = Direction.UP;
-            } 
+        } 
     }
 
     /**
@@ -101,8 +104,9 @@ public class Player extends Image {
      */
     public void moveDown() {
         if (isMoving) {
+            setImagePath("pacman_down.png");
             direction = Direction.DOWN;
-            } 
+        } 
     }
 
     /**
