@@ -68,7 +68,7 @@ public class Player extends Image {
     public void moveRight() {
         if (isMoving) {
             direction = Direction.RIGHT;
-            }
+        }
     }
 
     /**
@@ -85,7 +85,7 @@ public class Player extends Image {
     public void moveUp() {
         if (isMoving) {
             direction = Direction.UP;
-            } 
+        } 
     }
 
     /**
@@ -102,7 +102,7 @@ public class Player extends Image {
     public void moveDown() {
         if (isMoving) {
             direction = Direction.DOWN;
-            } 
+        } 
     }
 
     /**
