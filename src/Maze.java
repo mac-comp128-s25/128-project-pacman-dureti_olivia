@@ -2,6 +2,9 @@ import java.io.InputStream;
 import java.util.Scanner;
 import edu.macalester.graphics.GraphicsGroup;
 
+// Author: Dureti and Olivia
+// Description: This class compiles all the mazecells from the pacmanMaze res file and sets them up as a 2D Array of the final maze.
+// Acknowledgements: COMP 128 professor 
 
 public class Maze {
     private MazeCell[][] mazeCells;

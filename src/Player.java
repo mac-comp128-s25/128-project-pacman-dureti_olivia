@@ -1,6 +1,11 @@
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 
+
+// Author: Dureti and Olivia
+// Description: This class sets up the player's graphic design, and its movement based on an input direction
+// Acknowledgements: COMP 128 professor 
+
 public class Player extends Image {
 
     public static final double SIZE = 17;
@@ -121,5 +126,17 @@ public class Player extends Image {
      */
     public void keepMoving() {
         isMoving = true;
+    }
+
+    /**
+     * Tests whether the player's is colliding with a ghost.
+     * @param ghost
+     * @return true if the player is colliding with a ghost, false if not.
+     */
+    public boolean collisionWithGhost(Ghost ghost) {
+        if (getElementAt(getCenter().getX(), getCenter().getY()).equals(ghost)) {
+            return true;
+        } 
+        return false;
     }
 }

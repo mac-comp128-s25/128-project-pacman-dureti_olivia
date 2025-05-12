@@ -5,6 +5,10 @@ import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 
+// Author: Dureti and Olivia
+// Description: This class creates an individual Maze Cell, and has methods to determine if the cell should have pellets or be a wall.
+// Acknowledgements: COMP 128 professor 
+
 public class MazeCell extends GraphicsGroup {
     public static final int SIZE = 30;
     private static final Paint WALL_COLOR = Color.BLUE;

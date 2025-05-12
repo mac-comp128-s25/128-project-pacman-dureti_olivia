@@ -5,6 +5,10 @@ import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.events.Key;
 
+// Author: Dureti and Olivia
+// Description: This class is the main window canvas that holds and animates the player and maze.
+// Acknowledgements: COMP 128 professor 
+
 public class Pacman extends CanvasWindow {
     private static final int ANIMATE_DELAY = 12;
     private Player player;
@@ -32,7 +36,7 @@ public class Pacman extends CanvasWindow {
                 controlMovementStopping();
             }
         });
-        
+
         // move in the direction of the key that was pressed
         movePlayer();
     }
