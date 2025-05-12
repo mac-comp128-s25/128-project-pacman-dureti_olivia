@@ -39,7 +39,7 @@ public class Pacman extends CanvasWindow {
 
         player = new Player();
 
-        ghosts = Set.of(new BlinkyGhost(2, 2));
+        ghosts = Set.of(new BlinkyGhost(2, 2), new InkyGhost(2, 20), new PinkyGhost(22, 2), new ClydeGhost(22, 20));
         ghosts.forEach(this::add);
 
         add(player);

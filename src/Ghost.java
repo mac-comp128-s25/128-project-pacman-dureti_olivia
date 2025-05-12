@@ -8,13 +8,23 @@ public abstract class Ghost extends Image {
     public static final double SIZE = 25;
 
     private java.awt.Point pos;
+    private final java.awt.Point home;
     private int heading = Direction.NONE;
 
     public Ghost(int x, int y, String sprite_name) {
         super(sprite_name.concat("_ghost.png"));
         setMaxHeight(SIZE);
-        pos = new java.awt.Point(x, y);
+        home = new java.awt.Point(x, y);
+        pos = new java.awt.Point(home);
         syncPosition();
+    }
+
+    public java.awt.Point getHome() {
+        return new java.awt.Point(home);
+    }
+
+    public java.awt.Point getPos() {
+        return new java.awt.Point(pos);
     }
 
     public void syncPosition() {
