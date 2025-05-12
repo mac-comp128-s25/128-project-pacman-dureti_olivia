@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.util.HashSet;
+import java.util.Set;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Point;
@@ -13,6 +16,7 @@ public class Pacman extends CanvasWindow {
     private static final int ANIMATE_DELAY = 12;
     private Player player;
     private Maze maze;
+    private Set<Ghost> ghosts;
     private int animateTimer = 0;
     private int intVal = 0;
     private GraphicsText scoreCounter = new GraphicsText();
@@ -27,7 +31,16 @@ public class Pacman extends CanvasWindow {
     public Pacman() {
         super("Pacman", MazeCell.SIZE*25, MazeCell.SIZE*23);
         createAssets();
-        
+
+        maze = new Maze();
+        add(maze.getMaze());
+
+        player = new Player();
+
+        ghosts = Set.of(new Ghost(11, 9));
+        ghosts.forEach(this::add);
+
+        add(player);
         animate(() -> {
             animateTimer++;
             animateTimer %= ANIMATE_DELAY;
