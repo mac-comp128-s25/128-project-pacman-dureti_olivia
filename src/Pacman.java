@@ -22,8 +22,7 @@ public class Pacman extends CanvasWindow {
     private GraphicsText scoreCounter = new GraphicsText();
     private Rectangle scoreBackground;
     private int previousDirection =  4;
-    private final static int CELLSIZE = MazeCell.SIZE;
-    private final static int MAZEFACTOR = CELLSIZE/2;
+    private final static int MAZEFACTOR = MazeCell.SIZE/2;
 
     /**
      * Draws the maze, scoreboard, and player to the canvas. Animates the player's movement
@@ -131,10 +130,10 @@ public class Pacman extends CanvasWindow {
         Point upCell = player.anticipateUp();
         Point downCell = player.anticipateDown();
 
-        boolean isRightPath = !maze.cellIsWall((int) (((rightCell.getX()-MAZEFACTOR)/(CELLSIZE))), (int) ((rightCell.getY()-MAZEFACTOR)/CELLSIZE));
-        boolean isLeftPath = !maze.cellIsWall((int) (((leftCell.getX()-MAZEFACTOR)/(CELLSIZE))), (int) ((leftCell.getY()-MAZEFACTOR)/CELLSIZE));
-        boolean isUpPath = !maze.cellIsWall((int) (((upCell.getX()-MAZEFACTOR)/(CELLSIZE))), (int) ((upCell.getY()-MAZEFACTOR)/CELLSIZE));
-        boolean isDownPath = !maze.cellIsWall((int) (((downCell.getX()-MAZEFACTOR)/(CELLSIZE))), (int) ((downCell.getY()-MAZEFACTOR)/CELLSIZE));
+        boolean isRightPath = !maze.cellIsWall((int) (((rightCell.getX()-MAZEFACTOR)/(MazeCell.SIZE))), (int) ((rightCell.getY()-MAZEFACTOR)/MazeCell.SIZE));
+        boolean isLeftPath = !maze.cellIsWall((int) (((leftCell.getX()-MAZEFACTOR)/(MazeCell.SIZE))), (int) ((leftCell.getY()-MAZEFACTOR)/MazeCell.SIZE));
+        boolean isUpPath = !maze.cellIsWall((int) (((upCell.getX()-MAZEFACTOR)/(MazeCell.SIZE))), (int) ((upCell.getY()-MAZEFACTOR)/MazeCell.SIZE));
+        boolean isDownPath = !maze.cellIsWall((int) (((downCell.getX()-MAZEFACTOR)/(MazeCell.SIZE))), (int) ((downCell.getY()-MAZEFACTOR)/MazeCell.SIZE));
 
         if (player.getDirection() == Direction.RIGHT && !isRightPath) {
             if ((previousDirection == Direction.LEFT && !isLeftPath|| previousDirection == Direction.UP && !isUpPath || previousDirection == Direction.DOWN && !isDownPath) 
