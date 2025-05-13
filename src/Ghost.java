@@ -19,14 +19,23 @@ public abstract class Ghost extends Image {
         syncPosition();
     }
 
+    /*
+     * @return location where the ghost's home is.
+     */
     public java.awt.Point getHome() {
         return new java.awt.Point(home);
     }
 
+    /*
+     * @return current location.
+     */
     public java.awt.Point getPos() {
         return new java.awt.Point(pos);
     }
 
+    /*
+     * Syncs grid position with Canvas coordinates.
+     */
     public void syncPosition() {
         setCenter(pos.x*MazeCell.SIZE+(MazeCell.SIZE/2), pos.y*MazeCell.SIZE+(MazeCell.SIZE/2));
     }
@@ -43,6 +52,9 @@ public abstract class Ghost extends Image {
         return new java.awt.Point(pos);
     }
 
+    /*
+     * Move my one tile. This is run by the gameloop.
+     */
     public void move(Maze maze, Player player) {
         heading = nextDirection(maze, player);
         switch (heading) {
@@ -54,6 +66,9 @@ public abstract class Ghost extends Image {
         syncPosition();
     }
 
+    /*
+     * Get the direction to move in.
+     */
     private int nextDirection(Maze maze, Player player) {
         final Map<Integer, Double> directions = new HashMap<>();
         directions.put(Direction.UP,    distanceBetween(maze, player, new Point(pos.x,     pos.y - 1)));
@@ -71,6 +86,10 @@ public abstract class Ghost extends Image {
         return ret;
     }
 
+    /*
+     * Calculate distance between target point and check point.
+     * If that direction would put the ghost in the wall, return `Integer.MAX_VALUE`.
+     */
     private double distanceBetween(Maze maze, Player player, java.awt.Point check) {
         if (maze.cellIsWall(check.x, check.y)) {
             return Integer.MAX_VALUE;
@@ -79,5 +98,8 @@ public abstract class Ghost extends Image {
         }
     }
 
+    /*
+     * Determines ghost AI
+     */
     protected abstract java.awt.Point target(Maze maze, Player player);
 }
